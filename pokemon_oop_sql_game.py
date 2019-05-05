@@ -6,34 +6,33 @@ class Player:
     def __init__(self, name='Ash Ketchum', city='Pallet Town'):
         self.name = name
         self.city = city
-        self.inventory = ''
-        self.pokemon = ''
-        self.pokemon_caught_list = []
+        self.__pokemon_caught_list = []
 
-    def search_for_pokemon(self, pokemon=''):
-        poke_instance = PokemonNames()
-        pokemon = poke_instance.get_random_name()
-        print(f'A {pokemon} appeared!')
+    def search_for_pokemon(self, poke_instance):
+        # poke_instance = PokemonNames()
+        # pokemon = poke_instance.get_random_name()
+        #self.pokemon_encounter = pokemon
+        print(f'{self.name} brushes through the dense foliage of the forest')
+        print(f'A {poke_instance.pokemon_name} appeared!')
 
-    def try_catch_pokemon(self):
+    def try_catch_pokemon(self, poke_instance):
         while True:
             print(f'{self.name}: "Poke-ball go!"')
-            print('The pokemon is warped into the pokeball...')
+            print(f'{poke_instance.pokemon_name} is warped into the pokeball...')
             catch_rate = random.randint(0, 1)
 
             if catch_rate == 1:
-                print('You captured a {pokemon}!, congrats!, \n saving {pokemon}"s data to pokedex...')
-                self.pokemon_caught_list.append()
-                search_decision = print(input('Continue search?'))
+                print(f'You captured a {poke_instance.pokemon_name}!, congrats!, \n saving {poke_instance.pokemon_name}"s data to pokedex...')
+                self.__pokemon_caught_list.append(poke_instance)
+                break
             else:
-                print('The pokemon burst free out of your pokeball!')
-                capture_decision = print(input('Throw another? (Y/N)'))
-                if capture_decision.strip() == 'Y':
+                print(f'{poke_instance.pokemon_name} burst free out of your pokeball!')
+                throw_more = print(input('Throw another? (Y/N)'))
+                if throw_more.strip().capitalize() == 'Y':
                     continue
                 else:
                     print('You fled')
                     break
-
 
     def save_player_and_pokemon(self):
         #think insert into
@@ -44,11 +43,9 @@ class Player:
         # think fetch all
         pass
 
-
-class Pokemon(Player):
-    def __init__(self):
-        super(Pokemon, self).__init__()
-        self.pokemon_name = self.pokemon
+class Pokemon:
+    def __init__(self, pokemon_name):
+        self.pokemon_name = pokemon_name
 
     def pokemon_tackle(self):
         print(f'{self.pokemon_name} uses Tackle on you, ouch!')
@@ -58,13 +55,12 @@ class Pokemon(Player):
         print(f'{self.pokemon_name} makes its poke-noise')
         pass
 
-    def rest_to_regain_health(self):
+    def pokemon_rest(self):
         print(f'{self.pokemon_name} eats a poke-snack and takes a nap...')
         print(f'{self.pokemon_name}"s health has been fully restored!')
         pass
 
     def save_pokemon_encounter_to_pokedex(self):
-
         pass
 
     def load_pokedex_data_from_db(self):
