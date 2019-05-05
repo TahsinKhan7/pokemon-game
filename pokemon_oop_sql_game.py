@@ -1,28 +1,39 @@
 from pokemon_sql_db_connection import *
 from pokemonNames.pokemonNames import *
+import random
 
 class Player:
-    def __init__(self, name, city):
+    def __init__(self, name='Ash Ketchum', city='Pallet Town'):
         self.name = name
         self.city = city
+        self.inventory = ''
+        self.pokemon = ''
         self.pokemon_caught_list = []
 
-    def search_for_pokemon(self):
-        print(f'Welcome {self.name}, to your pokemon journey')
-        #input('press any key to continue')
-        #Psuedo code:
-        # Generate random pokemon
-        # prompt user to capture or not
-        # call a private encapsulated method to capture pokemon
+    def search_for_pokemon(self, pokemon=''):
+        poke_instance = PokemonNames()
+        pokemon = poke_instance.get_random_name()
+        print(f'A {pokemon} appeared!')
 
-        pass
+    def try_catch_pokemon(self):
+        while True:
+            print(f'{self.name}: "Poke-ball go!"')
+            print('The pokemon is warped into the pokeball...')
+            catch_rate = random.randint(0, 1)
 
+            if catch_rate == 1:
+                print('You captured a {pokemon}!, congrats!, \n saving {pokemon}"s data to pokedex...')
+                self.pokemon_caught_list.append()
+                search_decision = print(input('Continue search?'))
+            else:
+                print('The pokemon burst free out of your pokeball!')
+                capture_decision = print(input('Throw another? (Y/N)'))
+                if capture_decision.strip() == 'Y':
+                    continue
+                else:
+                    print('You fled')
+                    break
 
-    def __try_catch_pokemon(self):
-        # if successful append to pokemon list
-            # pokemon_list.append(pokemon_captured)
-            #think appending oop python objects to list
-        pass
 
     def save_player_and_pokemon(self):
         #think insert into
@@ -34,36 +45,27 @@ class Player:
         pass
 
 
-class Pokemon:
+class Pokemon(Player):
     def __init__(self):
-        self.pokemon_name = ''
+        super(Pokemon, self).__init__()
+        self.pokemon_name = self.pokemon
 
     def pokemon_tackle(self):
+        print(f'{self.pokemon_name} uses Tackle on you, ouch!')
         pass
 
     def pokemon_cry(self):
+        print(f'{self.pokemon_name} makes its poke-noise')
         pass
 
-    def rest_at_poke_center(self):
+    def rest_to_regain_health(self):
+        print(f'{self.pokemon_name} eats a poke-snack and takes a nap...')
+        print(f'{self.pokemon_name}"s health has been fully restored!')
         pass
 
-    def save_pokemon(self):
+    def save_pokemon_encounter_to_pokedex(self):
+
         pass
 
-    def load_pokemon(self):
+    def load_pokedex_data_from_db(self):
         pass
-
-p = PokemonNames()
-p.get_random_name()
-
-
-
-class PokeConnection:
-    def __init__(self):
-        #self.connection = 'Microsoft SQL Server'
-        self.server = 'localhost,1433'
-        self.database = 'Pokemon_Game_Db'
-        self.username = 'SA'
-        self.password = 'Passw0rd2018'
-        self.docker_db_instance = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+self.server+';DATABASE='+self.database+';UID='+self.username+';PWD='+ self.password)
-        self.cursors = self.docker_db_instance.cursor()
