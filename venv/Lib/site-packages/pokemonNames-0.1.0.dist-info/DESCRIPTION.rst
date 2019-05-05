@@ -1,0 +1,105 @@
+===============================
+pokemonNames
+===============================
+
+.. image:: https://badge.fury.io/py/pokemonNames.png
+    :target: http://badge.fury.io/py/pokemonNames
+
+.. image:: https://travis-ci.org/darkowlzz/pokemonNames.png?branch=master
+        :target: https://travis-ci.org/darkowlzz/pokemonNames
+
+
+Generate random pokemon names.
+
+* Free software: GPL license
+
+Installation
+------------
+
+The script is `available on PyPI`_.  To install with pip::
+
+    pip install pokemonNames
+
+
+Features
+--------
+
+* TODO
+
+Usage
+-----
+
+.. code-block:: pycon
+
+    >> from pokemonNames.pokemonNames import PokemonNames
+    >> p = PokemonNames()
+    >> p.get_random_name()
+    'Flareon'
+    >> p.get_name(4)
+    'Charmander'
+    >> p.append_to_list(['myNewPokemon1', 'myNewPokemon2'])
+    >> p.get_name(720)
+    'myNewPokemon1'
+    >> p.get_name(721)
+    'myNewPokemon2'
+    >> p.append_to_list(['anotherNewPokemon1', 'anotherNewPokemon2'], start=900)
+    >> p.get_name(900)
+    'anotherNewPokemon1'
+
+Let a file be newNames.txt with content
+
+.. code-block::
+
+    Pikasaur
+    Charfairy
+    Ponidog
+
+Import the above list as:
+
+.. code-block:: pycon
+
+    ...
+    >> p.append_to_list('newNames.txt')
+    >> p.get_name(722)
+    'Pikasaur'
+    ...
+
+An indexed file:
+
+.. code-block::
+
+    ...
+    1000 Flanyx
+    1005 Catmeow
+    ...
+
+Import indexed file as:
+
+.. code-block:: pycon
+
+    ...
+    >> p.append_to_list('indexedFileName', hasIndex=True)
+    >> p.get_name(1000)
+    'Flanyx'
+    >> p.get_name(1005)
+    'Catmeow'
+
+Docs
+----
+
+For detailed docs of the package use python's help utility.
+
+.. _available on PyPI: http://pypi.python.org/pypi/pokemonNames
+
+
+
+
+History
+-------
+
+0.1.0 (2014-09-11)
+---------------------
+
+* First release on PyPI.
+
+
