@@ -42,15 +42,17 @@ class Player:
     def save_player_and_pokemon_to_db(self, player_instance):
         query = (f"INSERT INTO Player(Name, City, PlayerInventory) VALUES ('{player_instance.name}','{player_instance.city}','{self.__pokemon_caught_list}')")
         cursor.execute(query)
-
-        # PokeConnection.__init__(self.cursor.execute(query))
-        # PokeConnection.cursor.commit()
-        # self.cursor.commit()
+        docker_Pokemon_Game_Db.commit()
+        print('Inventory data successfully saved!')
 
     def load_previous_player(self):
-        # Be able to retrieve/read previous stored players from a sql database
-        # think fetch all
-        pass
+        query = 'SELECT * FROM Player;'
+        cursor.execute(query)
+        player_results = cursor.fetchall()
+        print('Stored player data:')
+
+        for player in player_results:
+            print(Player(player.Name, player.City), player.PlayerInventory)
 
 class Pokemon:
     def __init__(self, pokemon_name):
@@ -69,8 +71,17 @@ class Pokemon:
         print(f'{self.pokemon_name}"s health has been fully restored!')
         pass
 
-    def save_pokemon_encounter_to_pokedex_db(self):
-        pass
+    def save_pokemon_encounter_to_pokedex_db(self, poke_instance):
+        query = (f"INSERT INTO Pokemon(EncounteredPokemon) VALUES ('{poke_instance.name}')")
+        cursor.execute(query)
+        docker_Pokemon_Game_Db.commit()
+        print('Pokemon encounter succesfully updated on pokedex!')
 
     def load_pokedex_data_from_db(self):
-        pass
+        query = 'SELECT * FROM Pokemon;'
+        cursor.execute(query)
+        poke_results = cursor.fetchall()
+        print('Loading pokedex data...:')
+
+        for pokemon in poke_results:
+            print(Pokemon(pokemon.pokemon_name))
