@@ -48,6 +48,10 @@ while True:
                 print('Please select Y or N')
                 continue
 
+        input('')
+        player_instance.load__player()
+        poke_instance.load_pokedex_data_from_db()
+
     elif poke_search.strip().capitalize() == 'N':
         print('You ran back home')
         break

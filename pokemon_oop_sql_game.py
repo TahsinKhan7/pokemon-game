@@ -45,7 +45,7 @@ class Player:
         docker_Pokemon_Game_Db.commit()
         print('Inventory data successfully saved!')
 
-    def load_previous_player(self):
+    def load__player(self):
         query = 'SELECT * FROM Player;'
         cursor.execute(query)
         player_results = cursor.fetchall()
