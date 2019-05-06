@@ -71,7 +71,7 @@ behavior/method/actions should:
     - Setting up a DB
     - Making a connection
     - Loading from DB into objects
-    - Saving - Making thing presistant
+    - Saving - Making thing persistent
 - Using external packages
 
 and also:

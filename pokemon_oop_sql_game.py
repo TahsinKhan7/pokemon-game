@@ -85,6 +85,8 @@ class Pokemon:
             print(load_poke.pokemon_name)
         print('\nPokedex data successfully loaded.')
 
+
+# __name__/__main__ for pokemon game:
 print("Pokemon game OOP class file:", __name__)
 
 if __name__ == '__main__':
