@@ -10,16 +10,17 @@ from pokemon_oop_sql_game import *
 player_name = input('Enter Player name: ')
 player_city = input('Enter Player hometown: ')
 
-#Creating instances:
+# Creating instances:
 player_instance = Player(player_name, player_city)  #Set a player name! (set to default 'Ash Ketchum' and 'Pallet town' if left empty)
 poke_gen = PokemonNames()
 
+# Printing story setting:
 print(f'\nWelcome {player_instance.name}, to your pokemon journey!')
 print(f'You leave {player_instance.city} and eventually find yourself in front of a forest with a large sign in front of it.')
 print('The sign reads: "WARNING!!!: highly inhabited pokemon-area"')
 print('You curiously enter the forest...')
 
-
+#Search for pokemon loop:
 while True:
     poke_search = input('\nSearch for pokemon? (Y/N): ')
 
@@ -34,6 +35,7 @@ while True:
         poke_instance.pokemon_rest()
         print('')
 
+        #Capturing pokemon loop
         while True:
             capture_decision = input(f'Attempt to capture? (Y/N): ')
             if capture_decision.strip().capitalize() == 'Y':
@@ -41,32 +43,38 @@ while True:
                 player_instance.save_player_and_pokemon_to_db(player_instance)
                 poke_instance.save_pokemon_encounter_to_pokedex_db(poke_instance)
 
-                db_check = input('Load saved player data? (Y/N): ')
-                if db_check.strip().capitalize() == 'Y':
-                    player_instance.load_player_from_db()
-
-                    
-                elif db_check.strip().capitalize() == 'N':
+                #Loading stored player or pokemon data via input loops:
+                while True:
+                    db_check = input('Load saved player data? (Y/N): ')
+                    if db_check.strip().capitalize() == 'Y':
+                        player_instance.load_player_from_db()
+                        break
+                    elif db_check.strip().capitalize() == 'N':
+                        break
+                    else:
+                        print('please state "Y" or "N"')
+                        continue
+                while True:
                     pokedex_check = input('See encountered pokemon in pokedex? (Y/N): ')
                     if pokedex_check.strip().capitalize() == 'Y':
                         poke_instance.load_pokedex_data_from_db()
-                    else:
                         break
-                else:
-                    break
-            elif poke_search.strip().capitalize() == 'N':
-                print('You ran away')
+                    elif pokedex_check.strip().capitalize() == 'N':
+                        break
+                    else:
+                        print('please state "Y" or "N"')
+                        continue
+            elif capture_decision.strip().capitalize() == 'N':
+                print('\nYou ran away...')
                 break
             else:
-                print('Please select Y or N')
+                print('\nPlease select Y or N')
                 continue
 
-
-
     elif poke_search.strip().capitalize() == 'N':
-        print('You ran back home')
+        print('\nYou ran back home')
         break
     else:
-        print('Please state Y or N')
+        print('\nPlease state Y or N')
         continue
 
