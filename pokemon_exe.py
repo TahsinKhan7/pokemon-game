@@ -1,11 +1,12 @@
 from pokemon_oop_sql_game import *
+#print("pokemon_exe is:", __name__)
 
 # poke_conn = PokeConnection()
 # poke_conn.cursor.execute()
 # pokemonNames package test
 # p = PokemonNames()
 # print('Random Pokemon:', p.get_random_name())
-''
+
 # User input for player name:
 player_name = input('Enter Player name: ')
 player_city = input('Enter Player hometown: ')
@@ -41,6 +42,7 @@ while True:
 
             if capture_decision.strip().capitalize() == 'Y':
                 player_instance.try_catch_pokemon(poke_instance)
+                player_instance.save_player_and_pokemon_to_db(player_instance, poke_instance)
                 break
             elif capture_decision.strip().capitalize() == 'N':
                 print('\nYou ran away...')
@@ -81,4 +83,4 @@ while True:
     else:
         print('\nPlease state Y or N')
         continue
-    player_instance.save_player_and_pokemon_to_db(player_instance, poke_instance)
+

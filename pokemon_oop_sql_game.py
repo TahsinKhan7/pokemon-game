@@ -84,3 +84,10 @@ class Pokemon:
             load_poke = Pokemon(pokemon.PokemonName)
             print(load_poke.pokemon_name)
         print('Pokedex data successfully loaded.')
+
+print("Pokemon game OOP class file:", __name__)
+
+if __name__ == '__main__':
+    print("Running game directly through main file")
+else:
+    print('Running game through executable')
