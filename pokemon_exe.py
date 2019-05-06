@@ -37,6 +37,7 @@ while True:
             capture_decision = input(f'Attempt to capture? (Y/N): ')
             if capture_decision.strip().capitalize() == 'Y':
                 player_instance.try_catch_pokemon(poke_instance)
+                player_instance.save_player_and_pokemon(poke_instance, player_instance)
                 break
             elif poke_search.strip().capitalize() == 'N':
                 print('You ran away')
@@ -51,3 +52,4 @@ while True:
     else:
         print('Please state Y or N')
         continue
+

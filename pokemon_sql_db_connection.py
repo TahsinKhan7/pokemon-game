@@ -8,4 +8,17 @@ class PokeConnection:
         self.username = 'SA'
         self.password = 'Passw0rd2018'
         self.docker_db_instance = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+self.server+';DATABASE='+self.database+';UID='+self.username+';PWD='+ self.password)
-        self.cursors = self.docker_db_instance.cursor()
+        self.cursor = self.docker_db_instance.cursor()
+
+##Variables to create a connection##
+connection = 'Microsoft SQL Server'
+server = 'localhost,1433'
+database = 'Pokemon_Game_Db'
+username = 'SA'
+password = 'Passw0rd2018'
+
+###Making a connection
+docker_Pokemon_Game_Db = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
+
+###Creationg a cursor that can excecute SQL functions on connected database
+cursor = docker_Pokemon_Game_Db.cursor()
