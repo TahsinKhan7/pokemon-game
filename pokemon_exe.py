@@ -1,5 +1,5 @@
 from pokemon_oop_sql_game import *
-#print("pokemon_exe is:", __name__)
+print("pokemon_exe is:", __name__,'\n')
 
 # poke_conn = PokeConnection()
 # poke_conn.cursor.execute()
@@ -8,6 +8,7 @@ from pokemon_oop_sql_game import *
 # print('Random Pokemon:', p.get_random_name())
 
 # User input for player name:
+print('Welcome to Pokemon Super Adventure 9000!')
 player_name = input('Enter Player name: ')
 player_city = input('Enter Player hometown: ')
 
@@ -48,7 +49,7 @@ while True:
                 print('\nYou ran away...')
                 break
             else:
-                print('\nPlease select Y or N')
+                print('\nPlease select Y or N.\n')
                 continue
 
         #Saving any pokemon enounter to pokedex:
@@ -57,7 +58,7 @@ while True:
 
         # Loading stored player or pokemon data via input loops:
         while True:
-            db_check = input('Load saved player data? (Y/N): ')
+            db_check = input('\nLoad saved player data? (Y/N): ')
             if db_check.strip().capitalize() == 'Y':
                 player_instance.load_player_from_db()
                 break
@@ -67,7 +68,7 @@ while True:
                 print('please state "Y" or "N"')
                 continue
         while True:
-            pokedex_check = input('See encountered pokemon in pokedex? (Y/N): ')
+            pokedex_check = input('\nSee encountered pokemon in pokedex? (Y/N): ')
             if pokedex_check.strip().capitalize() == 'Y':
                 poke_instance.load_pokedex_data_from_db()
                 break
@@ -83,4 +84,3 @@ while True:
     else:
         print('\nPlease state Y or N')
         continue
-

@@ -6,7 +6,7 @@ class Player:
     def __init__(self, name='Ash Ketchum', city='Pallet Town'):
         self.name = name
         self.city = city
-        self.__pokemon_caught_list = []
+        self.pokemon_caught_list = []
 
     def search_for_pokemon(self, poke_instance):
         # poke_instance = PokemonNames()
@@ -24,7 +24,7 @@ class Player:
             if catch_rate == 1:
                 print(f"\nYou captured a {poke_instance.pokemon_name}!, congrats!")
                 print(f"\nSaving {poke_instance.pokemon_name}'s data to pokedex and adding to your inventory...")
-                self.__pokemon_caught_list.append(poke_instance)
+                self.pokemon_caught_list.append(poke_instance.pokemon_name)
                 break
             else:
                 print(f'\n{poke_instance.pokemon_name} burst free out of your pokeball!\n')
@@ -40,16 +40,16 @@ class Player:
                     break
 
     def save_player_and_pokemon_to_db(self, player_instance, poke_instance):
-        query = (f"INSERT INTO PlayerSave(Name, City, CaughtPokemon) VALUES('{player_instance.name}','{player_instance.city}', '{self.__pokemon_caught_list}')")
+        query = (f"INSERT INTO PlayerSave(Name, City, CaughtPokemon) VALUES('{player_instance.name}','{player_instance.city}', '{poke_instance.pokemon_name}')")
         cursor.execute(query)
         docker_Pokemon_Game_Db.commit()
-        print('Inventory data successfully saved!')
+        print('\nInventory data successfully saved!')
 
     def load_player_from_db(self):
         query = 'SELECT * FROM PlayerSave;'
         cursor.execute(query)
         player_results = cursor.fetchall()
-        print('Displaying player data:')
+        print('\nDisplaying player data:')
 
         for player in player_results:
             print(Player(player.Name, player.City), player.CaughtPokemon)
@@ -78,16 +78,16 @@ class Pokemon:
         query = 'SELECT * FROM Pokedex;'
         cursor.execute(query)
         poke_results = cursor.fetchall()
-        print('Loading Pokedex data...:')
+        print('Loading Pokedex data...')
 
         for pokemon in poke_results:
             load_poke = Pokemon(pokemon.PokemonName)
             print(load_poke.pokemon_name)
-        print('Pokedex data successfully loaded.')
+        print('\nPokedex data successfully loaded.')
 
 print("Pokemon game OOP class file:", __name__)
 
 if __name__ == '__main__':
     print("Running game directly through main file")
 else:
-    print('Running game through executable')
+    print('Running game through executable.')
