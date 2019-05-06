@@ -39,20 +39,20 @@ class Player:
                     print('You ran away')
                     break
 
-    def save_player_and_pokemon_to_db(self, player_instance):
-        query = (f"INSERT INTO Player(Name, City, PlayerInventory) VALUES ('{player_instance.name}','{player_instance.city}','{self.__pokemon_caught_list}')")
+    def save_player_and_pokemon_to_db(self, player_instance, poke_instance):
+        query = (f"INSERT INTO PlayerSave(Name, City, CaughtPokemon) VALUES('{player_instance.name}','{player_instance.city}', '{self.__pokemon_caught_list}')")
         cursor.execute(query)
         docker_Pokemon_Game_Db.commit()
         print('Inventory data successfully saved!')
 
     def load_player_from_db(self):
-        query = 'SELECT * FROM Player;'
+        query = 'SELECT * FROM PlayerSave;'
         cursor.execute(query)
         player_results = cursor.fetchall()
-        print('Stored player data:')
+        print('Displaying player data:')
 
         for player in player_results:
-            print(Player(player.Name, player.City), player.PlayerInventory)
+            print(Player(player.Name, player.City), player.CaughtPokemon)
 
 class Pokemon:
     def __init__(self, pokemon_name):
@@ -69,7 +69,7 @@ class Pokemon:
         print(f'{self.pokemon_name}"s health has been fully restored!')
 
     def save_pokemon_encounter_to_pokedex_db(self, poke_instance):
-        query = (f"INSERT INTO Pokedex(EncounteredPokemon) VALUES ('{poke_instance.name}')")
+        query = (f"INSERT INTO Pokedex(PokemonName) VALUES ('{poke_instance.pokemon_name}')")
         cursor.execute(query)
         docker_Pokemon_Game_Db.commit()
         print('Pokemon encounter successfully updated on pokedex!')
@@ -81,5 +81,6 @@ class Pokemon:
         print('Loading Pokedex data...:')
 
         for pokemon in poke_results:
-            print(Pokemon(pokemon.pokemon_name))
-        print('Pokedex data successfully loaded')
+            load_poke = Pokemon(pokemon.PokemonName)
+            print(load_poke.pokemon_name)
+        print('Pokedex data successfully loaded.')
