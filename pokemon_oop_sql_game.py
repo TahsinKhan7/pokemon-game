@@ -60,28 +60,26 @@ class Pokemon:
 
     def pokemon_tackle(self):
         print(f'{self.pokemon_name} uses Tackle on you, ouch!')
-        pass
 
     def pokemon_cry(self):
         print(f'{self.pokemon_name} makes its poke-noise!')
-        pass
 
     def pokemon_rest(self):
         print(f'{self.pokemon_name} eats a poke-snack and takes a nap...')
         print(f'{self.pokemon_name}"s health has been fully restored!')
-        pass
 
     def save_pokemon_encounter_to_pokedex_db(self, poke_instance):
-        query = (f"INSERT INTO Pokemon(EncounteredPokemon) VALUES ('{poke_instance.name}')")
+        query = (f"INSERT INTO Pokedex(EncounteredPokemon) VALUES ('{poke_instance.name}')")
         cursor.execute(query)
         docker_Pokemon_Game_Db.commit()
-        print('Pokemon encounter succesfully updated on pokedex!')
+        print('Pokemon encounter successfully updated on pokedex!')
 
     def load_pokedex_data_from_db(self):
-        query = 'SELECT * FROM Pokemon;'
+        query = 'SELECT * FROM Pokedex;'
         cursor.execute(query)
         poke_results = cursor.fetchall()
-        print('Loading pokedex data...:')
+        print('Loading Pokedex data...:')
 
         for pokemon in poke_results:
             print(Pokemon(pokemon.pokemon_name))
+        print('Pokedex data successfully loaded')
