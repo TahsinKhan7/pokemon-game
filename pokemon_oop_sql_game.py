@@ -39,16 +39,13 @@ class Player:
                     print('You ran away')
                     break
 
-    def save_player_and_pokemon(self, poke_instance, player_instance):
-        query = (f"INSERT INTO Player(Name, City, CaughtPokemon) VALUES ('{player_instance.name}','{player_instance.city}','{poke_instance.pokemon_name}')")
-        PokeConnection.__init__(self.cursor.execute(query))
+    def save_player_and_pokemon_to_db(self, player_instance):
+        query = (f"INSERT INTO Player(Name, City, PlayerInventory) VALUES ('{player_instance.name}','{player_instance.city}','{self.__pokemon_caught_list}')")
+        cursor.execute(query)
 
-
-        PokeConnection.cursor.commit()
-        self.cursor.commit()
-
-        print('Executed save fruit!')
-
+        # PokeConnection.__init__(self.cursor.execute(query))
+        # PokeConnection.cursor.commit()
+        # self.cursor.commit()
 
     def load_previous_player(self):
         # Be able to retrieve/read previous stored players from a sql database
