@@ -40,7 +40,20 @@ while True:
                 player_instance.try_catch_pokemon(poke_instance)
                 player_instance.save_player_and_pokemon_to_db(player_instance)
                 poke_instance.save_pokemon_encounter_to_pokedex_db(poke_instance)
-                break
+
+                db_check = input('Load saved player data? (Y/N): ')
+                if db_check.strip().capitalize() == 'Y':
+                    player_instance.load_player_from_db()
+
+                    
+                elif db_check.strip().capitalize() == 'N':
+                    pokedex_check = input('See encountered pokemon in pokedex? (Y/N): ')
+                    if pokedex_check.strip().capitalize() == 'Y':
+                        poke_instance.load_pokedex_data_from_db()
+                    else:
+                        break
+                else:
+                    break
             elif poke_search.strip().capitalize() == 'N':
                 print('You ran away')
                 break
@@ -48,9 +61,7 @@ while True:
                 print('Please select Y or N')
                 continue
 
-        input('')
-        player_instance.load__player()
-        poke_instance.load_pokedex_data_from_db()
+
 
     elif poke_search.strip().capitalize() == 'N':
         print('You ran back home')
