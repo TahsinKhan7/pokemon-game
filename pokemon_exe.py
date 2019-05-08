@@ -13,7 +13,7 @@ player_name = input('Enter Player name: ')
 player_city = input('Enter Player hometown: ')
 
 # Creating instances:
-player_instance = Player(player_name, player_city)  #Set a player name! (set to default 'Ash Ketchum' and 'Pallet town' if left empty)
+player_instance = Player(player_name, player_city)
 poke_gen = PokemonNames()
 
 # Printing story setting:
@@ -43,7 +43,7 @@ while True:
 
             if capture_decision.strip().capitalize() == 'Y':
                 player_instance.try_catch_pokemon(poke_instance)
-                player_instance.save_player_and_pokemon_to_db(player_instance, poke_instance)
+                player_instance.save_player_and_pokemon_to_db(player_instance)
                 break
             elif capture_decision.strip().capitalize() == 'N':
                 print('\nYou ran away...')
@@ -55,8 +55,7 @@ while True:
         #Saving any pokemon enounter to pokedex:
         poke_instance.save_pokemon_encounter_to_pokedex_db(poke_instance)
 
-
-        # Loading stored player or pokemon data via input loops:
+        #Loading stored player or pokemon data via input loops:
         while True:
             db_check = input('\nLoad saved player data? (Y/N): ')
             if db_check.strip().capitalize() == 'Y':

@@ -25,6 +25,7 @@ class Player:
                 print(f"\nYou captured a {poke_instance.pokemon_name}!, congrats!")
                 print(f"\nSaving {poke_instance.pokemon_name}'s data to pokedex and adding to your inventory...")
                 self.pokemon_caught_list.append(poke_instance.pokemon_name)
+                joined_list = ','.join(self.pokemon_caught_list)
                 break
             else:
                 print(f'\n{poke_instance.pokemon_name} burst free out of your pokeball!\n')
@@ -39,8 +40,12 @@ class Player:
                     print('You ran away')
                     break
 
-    def save_player_and_pokemon_to_db(self, player_instance, poke_instance):
-        query = (f"INSERT INTO PlayerSave(Name, City, CaughtPokemon) VALUES('{player_instance.name}','{player_instance.city}', '{poke_instance.pokemon_name}')")
+    def save_player_and_pokemon_to_db(self, player_instance):
+        #print(self.__pokemon_caught_list)
+        #print(joined_list)
+        joined_list = ','.join(self.pokemon_caught_list)
+        query = (f"INSERT INTO PlayerSave(Name, City, CaughtPokemon) VALUES('{player_instance.name}','{player_instance.city}', '{joined_list}')")
+        #print(query)
         cursor.execute(query)
         docker_Pokemon_Game_Db.commit()
         print('\nInventory data successfully saved!')
@@ -50,9 +55,14 @@ class Player:
         cursor.execute(query)
         player_results = cursor.fetchall()
         print('\nDisplaying player data:')
+        joined_list = ','.join(self.pokemon_caught_list)
 
         for player in player_results:
+            print(player.Name, player.City, player.CaughtPokemon)
             print(Player(player.Name, player.City), player.CaughtPokemon)
+            # print(Player(player.Name, player.City), player.CaughtPokemon)
+            # new_player = Player(player.Name, player.City, player.CaughtPokemon)
+            # print(new_player.name, new_player.city, new_player.pokemon_caught_list)
 
 class Pokemon:
     def __init__(self, pokemon_name):

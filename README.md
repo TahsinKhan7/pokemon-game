@@ -1,4 +1,4 @@
-# Welcome to my Pokemon game :fire: :fire: :fire:
+#:fire: :fire: :fire: Welcome to my Pokemon game :fire: :fire: :fire:
 
 #####TLDR: The premise of this pokemon game is to encounter, catch and save pokemon.
 
